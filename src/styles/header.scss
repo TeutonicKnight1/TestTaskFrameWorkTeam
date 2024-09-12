@@ -1,0 +1,21 @@
+@import './colors.scss';
+
+.header {
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 100px;
+
+    &-button-light-mode {
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        border: none;
+        background-color: $secondary-black;
+        border-radius: 100%;
+        cursor: pointer;
+    }
+}
