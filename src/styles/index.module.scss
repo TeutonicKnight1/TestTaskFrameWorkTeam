@@ -1,17 +1,10 @@
 @import 'normalize-scss/sass/normalize/import-now';
-@import './header.scss';
-
 @import './colors.scss';
-@import './fonts.scss';
-
 
 body {
     background-color: $primary-black;
-    color: $primary-white
-}
-
-h1 {
-    font-family: $font-primary
+    color: $primary-white;
+    min-height: 100vh;
 }
 
 .container { 

@@ -1,0 +1,11 @@
+$width: 100vw * 0.272222;
+$height: $width * 0.663265;
+
+.card {
+
+    max-width: 392px;
+    max-height: 260px;
+    width: $width;
+    height: $height;
+
+}
