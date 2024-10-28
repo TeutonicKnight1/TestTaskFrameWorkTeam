@@ -1,18 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { Painting } from '../types';
+import { IPainting } from '../models/IPainting';
+
+interface ResponseData {
+  data: IPainting[];
+  totalCount: number;
+}
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://test-front.framework.team/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://test-front.framework.team' }),
   endpoints: builder => ({
-    getData: builder.query<Painting[], void>({
-      query: () => 'paintings',
-    }),
-    getImage: builder.query<string, string>({
-      query: name => `images/${name}.png`,
+    getPictures: builder.query<
+      ResponseData,
+      { _page?: number; _limit?: number }
+    >({
+      query: ({ _page = 1, _limit = 6 }) => ({
+        url: '/paintings',
+        params: {
+          _page: _page,
+          _limit: _limit,
+        },
+      }),
+      transformResponse: (response: IPainting[], meta) => ({
+        data: response,
+        totalCount: Number(meta?.response?.headers.get('x-total-count')),
+      }),
     }),
   }),
 });
 
-export const { useGetDataQuery, useGetImageQuery } = api;
+export const { useGetPicturesQuery } = api;

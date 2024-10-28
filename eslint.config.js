@@ -10,7 +10,7 @@ export default tseslint.config(
     env: { browser: true, es2020: true, node: true },
     extends: [
       js.configs.recommended,
-      ...typescript.configs.recommended.extends,
+      ...typescript.configs.recommended,
       "airbnb",
       "airbnb/hooks",
       "plugin:@typescript-eslint/recommended",
@@ -20,7 +20,6 @@ export default tseslint.config(
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
       globals: globals.browser,
     },
     parser: "@typescript-eslint/parser",

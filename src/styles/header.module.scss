@@ -1,21 +1,28 @@
-@import './colors.scss';
-
 .header {
     height: 80px;
+
+    padding: 0 20px;
+    margin: 0 auto;
+
+    max-width: 1240px;
+    min-width: 280px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 100px;
+    .logo {
+        max-width: 91px;
+        min-width: 73px;
+    }
+}
 
-    .lightmode_button {
-        height: 40px;
-        width: 40px;
-        padding: 10px;
-        border: none;
-        background-color: $secondary-black;
-        border-radius: 100%;
-        cursor: pointer;
+@media screen and (max-width: 1023px) {
+
+    .header {
+        height: 88px;
+        .logo {
+            
+        }
     }
 }

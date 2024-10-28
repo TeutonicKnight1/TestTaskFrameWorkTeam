@@ -1,27 +1,29 @@
 import classes from '../styles/card.module.scss';
 
-import { Painting } from '../types';
+import { IPainting } from '../models/IPainting';
 
-const Card = ({ painting, imageUrls }: { painting: Painting, imageUrls: { [key: string]: string } }) => {
+interface ICardProps {
+  painting: IPainting;
+}
+
+const Card: React.FC<ICardProps> = ({ painting }) => {
+  const imgURL = import.meta.env.VITE_BASE_URL_API + painting.imageUrl;
+
   return (
     <article className={classes.card}>
+      <img src={imgURL} alt={painting.name} className={classes.card_image} />
       <div className={classes.card_content}>
-        <h3 className={classes.card_title}>{painting.name}</h3>
-        <img src={painting.imgUrl} alt={imageUrls[painting.name]} className={classes.card_image}/>
+        <div className={classes.card_content_text}>
+          <h3 className={classes.card_content_text_title}>
+            {painting.name.toLocaleUpperCase()}
+          </h3>
+          <p className={classes.card_content_text_created}>
+            {painting.created}
+          </p>
+        </div>
       </div>
     </article>
   );
 };
 
-
-const CardGrid = ({ paintings, imageUrls }: { paintings: Painting[], imageUrls: { [key: string]: string } }) => {
-  return (
-    <div className={classes.card_grid}>
-      {paintings.map((painting) => (
-        <Card key={painting.id} painting={painting} imageUrls={imageUrls} />
-      ))}
-    </div>
-  );
-};
-
-export default CardGrid;
+export default Card;

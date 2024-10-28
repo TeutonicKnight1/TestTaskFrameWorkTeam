@@ -1,0 +1,146 @@
+@import './fonts.scss';
+
+.filters {
+  width: 492px;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+
+  background-color: var(--primary-color);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  &_header {
+    margin-top: 60px;
+    margin-left: 372px;
+
+    &_button {
+      border: none;
+      padding: 0;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 320px;
+
+    margin-left: 40px;
+    margin-top: 100px;
+
+    &_artist,
+    &_location,
+    &_years {
+      width: 100%;
+      &_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &_button {
+          border: none;
+          padding: 0;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+
+      &_content {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease; // Плавное изменение высоты
+
+        &_select {
+          margin-top: 24px;
+
+          width: 100%;
+          height: 36px;
+
+          padding: 8px 16px;
+
+          background-color: var(--secondary-color);
+          border-radius: 4px;
+          border: none;
+
+          font-family: $inter;
+          font-size: $p-medium;
+          color: var(--primary-color-reverse);
+        }
+
+        &.open {
+          height: 92px; // Установите здесь высоту, необходимую для вашего содержимого
+        }
+      }
+    }
+
+    &_location,
+    &_years {
+      margin-top: 32px;
+    }
+  }
+
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+
+    margin-top: 380px;
+    margin-left: 40px;
+
+    &_show,
+    &_clear {
+      border: none;
+      border-bottom: 1px solid var(--primary-color-reverse);
+      padding: 0;
+      color: var(--primary-color-reverse);
+
+      background-color: transparent;
+      cursor: pointer;
+
+      font-family: $inter;
+      font-size: $p-small;
+    }
+  }
+}
+
+.filters_active {
+  animation: slide-out 0.5s ease-in-out forwards;
+}
+
+.filters_open {
+  animation: slide-in 0.5s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
