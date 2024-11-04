@@ -1,11 +1,11 @@
-import { IPainting } from '../models/IPainting';
+import { ICompletePainting } from '../models/ICompletePaintings';
 
 import Card from './Card';
 
 import classes from '../styles/cardGrid.module.scss';
 
 interface ICardGridProps {
-  paintings: IPainting[];
+  paintings: ICompletePainting[];
 }
 const CardGrid: React.FC<ICardGridProps> = ({ paintings }) => {
   return (

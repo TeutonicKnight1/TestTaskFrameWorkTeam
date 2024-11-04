@@ -5,12 +5,16 @@ import search_light_icon from '../assets/search_light_icon.png';
 import filters_dark_icon from '../assets/filters_dark_icon.png';
 import filters_light_icon from '../assets/filters_light_icon.png';
 
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { useState, FormEvent, ChangeEvent } from 'react';
+
+import { setFindString } from '../store/slices/filtersSlice';
 
 import Filters from './Filters';
 
 const Search: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const currentTheme = useAppSelector(state => state.theme.theme);
   const [filtersIsOpened, setFiltersIsOpened] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
@@ -31,6 +35,7 @@ const Search: React.FC = () => {
 
   const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    dispatch(setFindString(e.target.value));
   };
 
   return (

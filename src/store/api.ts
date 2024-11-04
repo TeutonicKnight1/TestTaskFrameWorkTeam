@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { IPainting } from '../models/IPainting';
+import { ILocation } from '../models/ILocation';
+import { IAuthor } from '../models/IAuthor';
 
 interface ResponseData {
   data: IPainting[];
@@ -27,7 +29,13 @@ export const api = createApi({
         totalCount: Number(meta?.response?.headers.get('x-total-count')),
       }),
     }),
+    getAuthors: builder.query<IAuthor[], void>({
+      query: () => '/authors',
+    }),
+    getLocations: builder.query<ILocation[], void>({
+      query: () => '/locations',
+    }),
   }),
 });
 
-export const { useGetPicturesQuery } = api;
+export const { useGetPicturesQuery, useGetAuthorsQuery, useGetLocationsQuery } = api;

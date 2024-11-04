@@ -78,7 +78,7 @@ const Pagination: React.FC<PaginationProps> = ({
           className={classes.pagination_button}
           onClick={() => handlePageChange(totalCount - 1)}
         >
-          {totalCount}
+          {totalCount - 1}
         </button>,
         <button
           key={totalCount}

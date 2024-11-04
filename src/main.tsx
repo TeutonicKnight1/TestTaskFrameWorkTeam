@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 
 import '@fontsource/cormorant';
+import '@fontsource/cormorant/500.css';
 import '@fontsource/inter/400.css';
 
 import './styles/variablesTheme/variablesTheme.scss';
