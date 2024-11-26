@@ -4,11 +4,7 @@
   max-width: 392px;
   max-height: 260px;
 
-  min-width: 280px;
-  min-height: 185px;
-
   aspect-ratio: 392/260;
-  width: 28vw;
   height: auto;
   object-fit: contain;
 
@@ -26,9 +22,7 @@
 
   &_content {
     height: 31.539%;
-    max-height: 82px;
     width: 300px;
-    min-height: 66px;
 
     aspect-ratio: 300/82;
 
@@ -80,6 +74,10 @@
           font-size: $p-small;
           font-weight: lighter;
 
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
           color: var(--accent-color);
         }
       }
@@ -107,17 +105,11 @@
 
 @media screen and (max-width: 1023px) {
   .card {
-    max-width: 352px;
-    max-height: 220px;
-    width: 46vw;
-
     aspect-ratio: 352/220;
-
-    min-width: 280px;
-    min-height: 185px;
 
     &_content {
       height: 66px;
+      width: 300px;
 
       &_outside {
         top: 12px;
@@ -139,13 +131,14 @@
 
 @media screen and (max-width: 767px) {
   .card {
-    width: 280px;
-    height: 185px;
+    aspect-ratio: 280/185;
+    min-width: 280px;
+    min-height: 185px;
 
     &_content {
-      aspect-ratio: 300/82;
-      width: 76.53%;
-      height: auto;
+      aspect-ratio: 236/45;
+      width: 236px;
+      height: 45px;
 
       &_outside,
       &_inside {

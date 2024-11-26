@@ -15,6 +15,7 @@ import {
   setLocationId,
   setYearFrom,
   setYearTo,
+  clearFilters,
 } from '../store/slices/filtersSlice';
 
 interface FiltersProps {
@@ -47,6 +48,11 @@ const Filters: React.FC<FiltersProps> = ({
   const [locationIsOpened, setLocationIsOpened] = useState(false);
   const [yearsIsOpened, setYearsIsOpened] = useState(false);
 
+  const [selectedArtist, setSelectedArtist] = useState<string>('');
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
+  const [yearFromValue, setYearFromValue] = useState('');
+  const [yearToValue, setYearToValue] = useState('');
+
   const toggleArtist = () => {
     setArtistIsOpened(prev => !prev);
     if (artistIsOpened) {
@@ -76,16 +82,30 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const changeArtist = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setArtistId(e.target.value));
+    setSelectedArtist(e.target.value);
   };
   const changeLocation = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setLocationId(e.target.value));
+    setSelectedLocation(e.target.value);
   };
   const changeYearFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setYearFrom(e.target.value));
+    setYearFromValue(e.target.value);
   };
   const changeYearTo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setYearTo(e.target.value));
+    setYearToValue(e.target.value);
+  };
+
+  const hanldeClearFilters = () => {
+    dispatch(clearFilters());
+    setYearFromValue('');
+    setYearToValue('');
+    handleFiltersIsOpened();
+  };
+
+  const handleShowResultsButtonClick = () => {
+    dispatch(setArtistId(selectedArtist));
+    dispatch(setLocationId(selectedLocation));
+    dispatch(setYearFrom(yearFromValue));
+    dispatch(setYearTo(yearToValue));
   };
 
   const [isVisible, setIsVisible] = useState(filtersIsOpened);
@@ -134,6 +154,7 @@ const Filters: React.FC<FiltersProps> = ({
                 className={classes.filters_list_artist_content_select}
                 onChange={changeArtist}
               >
+                <option value="" key={""}></option>
                 {authors &&
                   authors.map(author => (
                     <option key={author.id} value={author.id}>
@@ -162,6 +183,7 @@ const Filters: React.FC<FiltersProps> = ({
                 className={classes.filters_list_location_content_select}
                 onChange={changeLocation}
               >
+                <option value="" key={""}></option>
                 {locations &&
                   locations.map(location => (
                     <option key={location.id} value={location.id}>
@@ -189,12 +211,14 @@ const Filters: React.FC<FiltersProps> = ({
                   className={classes.filters_list_years_content_form_input}
                   placeholder="From"
                   type="text"
+                  value={yearFromValue}
                   onChange={changeYearFrom}
                 />
                 <img src={minus_dark_icon} />
                 <input
                   placeholder="To"
                   type="text"
+                  value={yearToValue}
                   className={classes.filters_list_years_content_form_input}
                   onChange={changeYearTo}
                 />
@@ -204,10 +228,18 @@ const Filters: React.FC<FiltersProps> = ({
         </ul>
       </div>
       <div className={classes.filters_footer}>
-        <button className={classes.filters_footer_show}>
+        <button
+          className={classes.filters_footer_show}
+          onClick={handleShowResultsButtonClick}
+        >
           SHOW THE RESULTS
         </button>
-        <button className={classes.filters_footer_clear}>CLEAR</button>
+        <button
+          className={classes.filters_footer_clear}
+          onClick={hanldeClearFilters}
+        >
+          CLEAR
+        </button>
       </div>
     </div>
   ) : null;

@@ -15,13 +15,34 @@ export const api = createApi({
   endpoints: builder => ({
     getPictures: builder.query<
       ResponseData,
-      { _page?: number; _limit?: number }
+      {
+        _page?: number;
+        _limit?: number;
+        findString?: string;
+        authorId?: number;
+        locationId?: number;
+        yearFrom?: string;
+        yearTo?: string;
+      }
     >({
-      query: ({ _page = 1, _limit = 6 }) => ({
+      query: ({
+        _page = 1,
+        _limit = 6,
+        findString = '',
+        authorId,
+        locationId,
+        yearFrom,
+        yearTo,
+      }) => ({
         url: '/paintings',
         params: {
           _page: _page,
           _limit: _limit,
+          q: findString,
+          authorId,
+          locationId,
+          created_gte: yearFrom,
+          created_lte: yearTo,
         },
       }),
       transformResponse: (response: IPainting[], meta) => ({
@@ -38,4 +59,5 @@ export const api = createApi({
   }),
 });
 
-export const { useGetPicturesQuery, useGetAuthorsQuery, useGetLocationsQuery } = api;
+export const { useGetPicturesQuery, useGetAuthorsQuery, useGetLocationsQuery } =
+  api;

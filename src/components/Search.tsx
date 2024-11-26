@@ -30,19 +30,25 @@ const Search: React.FC = () => {
 
   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Searching for:', query);
   };
 
   const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    dispatch(setFindString(e.target.value));
+  };
+
+  const handleSearchButtonClick = () => {
+    dispatch(setFindString(query));
   };
 
   return (
     <div className={classes.container}>
       <div className={classes.search}>
         <form className={classes.search_form} onSubmit={handleSearchSubmit}>
-          <button className={classes.search_form_button} type="submit">
+          <button
+            className={classes.search_form_button}
+            type="submit"
+            onClick={handleSearchButtonClick}
+          >
             <img src={searchIcon} alt="search icon" />
           </button>
           <input
@@ -54,17 +60,18 @@ const Search: React.FC = () => {
             onChange={handleQueryChange}
           />
         </form>
+
+        <button
+          className={classes.filters_button}
+          onClick={handleFiltersIsOpened}
+        >
+          <img
+            className={classes.filters_button_icon}
+            src={filtersIcon}
+            alt="filters icon"
+          />
+        </button>
       </div>
-      <button
-        className={classes.filters_button}
-        onClick={handleFiltersIsOpened}
-      >
-        <img
-          className={classes.filters_button_icon}
-          src={filtersIcon}
-          alt="filters icon"
-        />
-      </button>
       <Filters
         setFiltersIsOpened={setFiltersIsOpened}
         filtersIsOpened={filtersIsOpened}
