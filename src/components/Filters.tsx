@@ -214,7 +214,7 @@ const Filters: React.FC<FiltersProps> = ({
                   value={yearFromValue}
                   onChange={changeYearFrom}
                 />
-                <img src={minus_dark_icon} />
+                <img className={classes.filters_list_years_content_form_icon} src={minus_dark_icon} />
                 <input
                   placeholder="To"
                   type="text"

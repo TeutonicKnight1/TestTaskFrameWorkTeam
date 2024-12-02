@@ -21,8 +21,11 @@
 
     .header {
         height: 88px;
-        .logo {
-            
-        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        height: 64px;
     }
 }

@@ -32,9 +32,9 @@
       cursor: pointer;
     }
   }
-  
+
   &_content {
-    height: 420px;
+    height: 404px;
   }
 
   &_list {
@@ -59,6 +59,7 @@
 
         &_title {
           font-weight: 500;
+          font-size: $h1-medium;
         }
 
         &_button {
@@ -95,10 +96,9 @@
 
         &_form {
           margin-top: 24px;
-          
+
           display: flex;
           align-items: center;
-
 
           &_input {
             width: 67px;
@@ -114,6 +114,10 @@
             font-family: $inter;
             font-size: $p-medium;
             color: var(--primary-color-reverse);
+          }
+
+          &_icon {
+            margin: 8px;
           }
         }
 
@@ -141,7 +145,7 @@
     align-items: center;
     width: 320px;
 
-    margin-top: 190px;
+    margin-top: 200px;
     margin-left: 40px;
 
     &_show,
@@ -156,6 +160,92 @@
 
       font-family: $inter;
       font-size: $p-small;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .filters {
+    width: 372px;
+
+    &_header {
+      margin-left: 328px;
+      margin-top: 24px;
+    }
+
+    &_content {
+      height: 440px;
+    }
+
+    &_list {
+      margin-top: 136px;
+      margin-left: 32px;
+    }
+
+    &_footer {
+      margin-left: 32px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .filters {
+    width: 280px;
+
+    &_header {
+      margin-left: 240px;
+      margin-top: 20px;
+    }
+
+    &_content {
+      height: 364px;
+    }
+
+    &_list {
+      margin-top: 84px;
+      margin-left: 20px;
+
+      width: 240px;
+
+      &_artist,
+      &_location,
+      &_years {
+        &_header {
+          &_title {
+            font-size: $h2-medium;
+          }
+
+          &_button {
+            width: 12px;
+            height: 12px;
+          }
+        }
+
+        &_content {
+          &_select {
+            height: 33px;
+          }
+
+          &_form {
+            &_input {
+              height: 33px;
+
+              font-size: $p-small;
+            }
+          }
+
+          &.open {
+            height: 57px;
+          }
+        }
+      }
+    }
+
+    &_footer {
+      margin-left: 20px;
+      margin-top: 60px;
+
+      width: 240px;
     }
   }
 }

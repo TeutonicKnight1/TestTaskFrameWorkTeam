@@ -11,7 +11,13 @@ const Card: React.FC<ICardProps> = ({ painting }) => {
 
   return (
     <article className={classes.card}>
-      <img src={imgURL} alt={painting.name} className={classes.card_image} />
+      <img
+        src={imgURL}
+        alt={painting.name}
+        className={classes.card_image}
+        loading="lazy"
+        decoding="async"
+      />
       <div className={classes.card_content}>
         <div className={classes.card_content_outside}>
           <div className={classes.card_content_outside_text}>
