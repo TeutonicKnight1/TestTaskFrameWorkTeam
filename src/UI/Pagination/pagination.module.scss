@@ -1,0 +1,17 @@
+@import '../../styles/fonts.scss';
+
+.pagination {
+  margin-top: 40px;
+  padding-bottom: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  
+
+  &_span {
+    margin: 0 4px;
+    padding: 0 4px;
+  }
+}

@@ -1,0 +1,164 @@
+@import '../../styles/fonts.scss';
+
+.card {
+  aspect-ratio: 392/260;
+  height: auto;
+  object-fit: contain;
+
+  overflow: hidden;
+
+  position: relative;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .content {
+    height: 31.539%;
+    width: 300px;
+
+    aspect-ratio: 300/82;
+
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+
+    background-color: var(--primary-color);
+
+    .outside {
+      position: absolute;
+      top: 20px;
+      left: -300px;
+
+      transition: left 0.3s ease-in-out;
+    }
+
+    .inside {
+      position: absolute;
+      bottom: 20px;
+
+      transition: bottom 0.3s ease-in-out;
+    }
+
+    .outside,
+    .inside {
+      width: 95%;
+
+      .text {
+        border-left: 2px var(--accent-color) solid;
+        padding-left: 20px;
+
+        width: 100%;
+        box-sizing: border-box;
+
+        .title {
+          font-weight: normal;
+          font-family: $cormorant;
+          font-size: $p-big;
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .p {
+          margin: 8px 0 0 0;
+          font-family: $inter;
+          font-size: $p-small;
+          font-weight: lighter;
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .image {
+      transform: scale(1.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .content {
+      .outside {
+        left: 0;
+        transition: left 0.3s ease-in-out;
+      }
+      .inside {
+        bottom: -83px;
+        transition: bottom 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .card {
+    aspect-ratio: 352/220;
+
+    .content {
+      height: 66px;
+      width: 300px;
+
+      .outside {
+        top: 12px;
+      }
+
+      .inside {
+        bottom: 12px;
+      }
+
+      .outside,
+      .inside {
+        .text {
+          border: none;
+          padding-left: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    aspect-ratio: 280/185;
+    min-width: 280px;
+    min-height: 185px;
+
+    .content {
+      aspect-ratio: 236/45;
+      width: 236px;
+      height: 45px;
+
+      .outside,
+      .inside {
+        .text {
+          .title {
+            font-size: $p-small;
+          }
+
+          .p {
+            margin-top: 5px;
+            font-size: $caption;
+          }
+        }
+      }
+
+      .outside {
+        top: 8px;
+      }
+
+      .inside {
+        bottom: 8px;
+      }
+    }
+  }
+}

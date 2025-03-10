@@ -1,8 +1,8 @@
 import classes from './index.module.scss';
 
-import CardGrid from './components/CardGrid';
-import Header from './components/Header';
-import Search from './components/Search';
+import CardGrid from '@components/CardGrid/CardGrid';
+import Header from '@components/Header/Header';
+import Search from '@components/Search/Search';
 
 function App() {
   return (

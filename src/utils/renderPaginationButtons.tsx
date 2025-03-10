@@ -1,6 +1,5 @@
-import ActiveNumberPageButton from '../UI/PaginationButtons/ActiveNumberPageButton';
-import NumberPageButton from '../UI/PaginationButtons/NumberPageButton';
-import classes from '../styles/pagination.module.scss';
+import PageButton from '@UI/PaginationButtons/PageButton';
+import classes from '../UI/PaginationButtons/paginationButtons.module.scss';
 
 const renderPaginationButtons = (
   totalCount: number,
@@ -20,18 +19,20 @@ const renderPaginationButtons = (
       for (let i = 1; i <= 3; i++) {
         if (i === currentPage) {
           pages.push(
-            <ActiveNumberPageButton
+            <PageButton
               key={i}
-              numberPage={i}
-              handlePageChange={handlePageChange}
+              children={i}
+              callback={() => handlePageChange(i)}
+              styleClass="button_active"
             />
           );
         } else {
           pages.push(
-            <NumberPageButton
+            <PageButton
               key={i}
-              numberPage={i}
-              handlePageChange={handlePageChange}
+              children={i}
+              callback={() => handlePageChange(i)}
+              styleClass="button"
             />
           );
         }
@@ -40,19 +41,21 @@ const renderPaginationButtons = (
         <span key="dots_1" className={classes.pagination_span}>
           ...
         </span>,
-        <NumberPageButton
+        <PageButton
           key={totalCount}
-          numberPage={totalCount}
-          handlePageChange={handlePageChange}
+          children={totalCount}
+          callback={() => handlePageChange(totalCount)}
+          styleClass="button"
         />
       );
     } else if (currentPage === totalCount || currentPage === totalCount - 1) {
       // 1 ... 6 7 8
       pages.push(
-        <NumberPageButton
+        <PageButton
           key={1}
-          numberPage={1}
-          handlePageChange={handlePageChange}
+          children={1}
+          callback={() => handlePageChange(1)}
+          styleClass="button"
         />,
         <span key="dots_1" className={classes.pagination_span}>
           ...
@@ -61,28 +64,31 @@ const renderPaginationButtons = (
       for (let i = totalCount - 2; i <= totalCount; i++) {
         if (i === currentPage) {
           pages.push(
-            <ActiveNumberPageButton
+            <PageButton
               key={i}
-              numberPage={i}
-              handlePageChange={handlePageChange}
+              children={i}
+              callback={() => handlePageChange(i)}
+              styleClass="button_active"
             />
           );
         } else {
           pages.push(
-            <NumberPageButton
+            <PageButton
               key={i}
-              numberPage={i}
-              handlePageChange={handlePageChange}
+              children={i}
+              callback={() => handlePageChange(i)}
+              styleClass="button"
             />
           );
         }
       }
     } else {
       pages.push(
-        <NumberPageButton
+        <PageButton
           key={1}
-          numberPage={1}
-          handlePageChange={handlePageChange}
+          children={1}
+          callback={() => handlePageChange(1)}
+          styleClass="button"
         />
       );
       if (shouldShowDotsLeft) {
@@ -94,20 +100,23 @@ const renderPaginationButtons = (
       }
 
       pages.push(
-        <NumberPageButton
+        <PageButton
           key={currentPage - 1}
-          numberPage={currentPage - 1}
-          handlePageChange={handlePageChange}
+          children={currentPage - 1}
+          callback={() => handlePageChange(currentPage - 1)}
+          styleClass="button"
         />,
-        <ActiveNumberPageButton
+        <PageButton
           key={currentPage}
-          numberPage={currentPage}
-          handlePageChange={handlePageChange}
+          children={currentPage}
+          callback={() => handlePageChange(currentPage)}
+          styleClass="button_active"
         />,
-        <NumberPageButton
+        <PageButton
           key={currentPage + 1}
-          numberPage={currentPage + 1}
-          handlePageChange={handlePageChange}
+          children={currentPage + 1}
+          callback={() => handlePageChange(currentPage + 1)}
+          styleClass="button"
         />
       );
 
@@ -120,10 +129,11 @@ const renderPaginationButtons = (
       }
 
       pages.push(
-        <NumberPageButton
+        <PageButton
           key={totalCount}
-          numberPage={totalCount}
-          handlePageChange={handlePageChange}
+          children={totalCount}
+          callback={() => handlePageChange(totalCount)}
+          styleClass="button"
         />
       );
     }
@@ -131,18 +141,20 @@ const renderPaginationButtons = (
     for (let i = 1; i <= totalCount; i++) {
       if (i === currentPage) {
         pages.push(
-          <ActiveNumberPageButton
+          <PageButton
             key={i}
-            numberPage={i}
-            handlePageChange={handlePageChange}
+            children={i}
+            callback={() => handlePageChange(i)}
+            styleClass="button_active"
           />
         );
       } else {
         pages.push(
-          <NumberPageButton
+          <PageButton
             key={i}
-            numberPage={i}
-            handlePageChange={handlePageChange}
+            children={i}
+            callback={() => handlePageChange(i)}
+            styleClass="button"
           />
         );
       }

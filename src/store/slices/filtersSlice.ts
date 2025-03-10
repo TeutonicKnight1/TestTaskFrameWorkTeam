@@ -6,6 +6,8 @@ const initialState = {
   yearFrom: '',
   yearTo: '',
   authorId: 0,
+
+  filtersIsOpen: false,
 };
 
 const filtersSlice = createSlice({
@@ -34,6 +36,9 @@ const filtersSlice = createSlice({
       state.yearTo = '';
       state.authorId = 0;
     },
+    setFiltersIsOpen(state, action) {
+      state.filtersIsOpen = action.payload;
+    },
   },
 });
 
@@ -45,4 +50,5 @@ export const {
   setYearTo,
   setFindString,
   clearFilters,
+  setFiltersIsOpen,
 } = filtersSlice.actions;
