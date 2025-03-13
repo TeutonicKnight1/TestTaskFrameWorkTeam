@@ -4,7 +4,7 @@ import close_dark_icon from '@assets/close_dark_icon.png';
 import plus_dark_icon from '@assets/expand_plus_dark_icon.png';
 import minus_dark_icon from '@assets/expand_minus_dark_icon.png';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 
 import {
@@ -14,7 +14,6 @@ import {
   setLocationId,
   clearFilters,
   setArtistId,
-  setFindString,
 } from '@store/slices/filtersSlice';
 
 import FiltersSelect from '@UI/FiltersSelect/FiltersSelect';
@@ -31,52 +30,43 @@ const Filters: React.FC = () => {
 
   const [yearFrom, setYearFromValue] = useState('');
   const [yearTo, setYearToValue] = useState('');
-  const [isVisible, setIsVisible] = useState(filtersIsOpened);
 
   const yearsIcon = yearsIsOpened ? minus_dark_icon : plus_dark_icon;
 
-  useEffect(() => {
-    if (filtersIsOpened) {
-      setIsVisible(true);
-    } else {
-      const timeout = setTimeout(() => setIsVisible(false), 300);
-      return () => clearTimeout(timeout);
-    }
-  }, [filtersIsOpened]);
-
   const toggleYears = useCallback(() => setYearsIsOpened(prev => !prev), []);
-  const handleClearFilters = useCallback(() => {
+  const handleClearFilters = () => {
     dispatch(clearFilters());
     setYearFromValue('');
     setYearToValue('');
     dispatch(setFiltersIsOpen(false));
-  }, [dispatch]);
+  };
 
   const handleShowResults = useCallback(() => {
     dispatch(setYearFrom(yearFrom));
     dispatch(setYearTo(yearTo));
+
+    dispatch(setFiltersIsOpen(false));
   }, [dispatch, yearFrom, yearTo]);
 
   const filtersClass = useMemo(
     () =>
-      `${classes.filters} ${filtersIsOpened ? classes.filters_open : classes.filters_active}`,
+      `${classes.filters} ${filtersIsOpened ? classes.filters_open : classes.filters_close}`,
     [filtersIsOpened]
   );
 
-  if (!isVisible) return null;
   return (
     <div className={filtersClass}>
       <div className={classes.filters_header}>
         <button
-          className={classes.filters_header_button}
+          className={classes.cross_button}
           onClick={() => dispatch(setFiltersIsOpen(!filtersIsOpened))}
         >
           <img src={close_dark_icon} alt="Close filters" />
         </button>
       </div>
-      <div className={classes.filters_content}>
-        <ul className={classes.filters_list}>
-          <li className={classes.filters_list_artist}>
+      <div className={classes.content}>
+        <ul className={classes.list}>
+          <li className={classes.list_artist}>
             <FiltersSelect
               name="Authors"
               options={authors}
@@ -85,7 +75,7 @@ const Filters: React.FC = () => {
               onSelectOption={id => dispatch(setArtistId(id))}
             />
           </li>
-          <li className={classes.filters_list_location}>
+          <li className={classes.list_location}>
             <FiltersSelect
               name="location"
               options={locations}
@@ -94,32 +84,26 @@ const Filters: React.FC = () => {
               onSelectOption={id => dispatch(setLocationId(id))}
             />
           </li>
-          <li className={classes.filters_list_years}>
-            <div className={classes.filters_list_years_header}>
-              <h4 className={classes.filters_list_years_header_title}>YEARS</h4>
-              <button
-                className={classes.filters_list_years_header_button}
-                onClick={toggleYears}
-              >
+          <li className={classes.list_years}>
+            <div className={classes.header}>
+              <h4 className={classes.title}>YEARS</h4>
+              <button className={classes.expand_button} onClick={toggleYears}>
                 <img src={yearsIcon} alt="Expand years filter" />
               </button>
             </div>
             <div
-              className={`${classes.filters_list_years_content} ${yearsIsOpened ? classes.open : ''}`}
+              className={`${classes.content} ${yearsIsOpened ? classes.open : ''}`}
             >
-              <div className={classes.filters_list_years_content_form}>
+              <div className={classes.form}>
                 <input
-                  className={classes.filters_list_years_content_form_input}
+                  className={classes.input}
                   placeholder="From"
                   value={yearFrom}
                   onChange={e => setYearFromValue(e.target.value)}
                 />
-                <img
-                  className={classes.filters_list_years_content_form_icon}
-                  src={minus_dark_icon}
-                />
+                <img className={classes.icon} src={minus_dark_icon} />
                 <input
-                  className={classes.filters_list_years_content_form_input}
+                  className={classes.input}
                   placeholder="To"
                   value={yearTo}
                   onChange={e => setYearToValue(e.target.value)}
@@ -129,17 +113,11 @@ const Filters: React.FC = () => {
           </li>
         </ul>
       </div>
-      <div className={classes.filters_footer}>
-        <button
-          className={classes.filters_footer_show}
-          onClick={handleShowResults}
-        >
+      <div className={classes.footer}>
+        <button className={classes.footer_show} onClick={handleShowResults}>
           SHOW THE RESULTS
         </button>
-        <button
-          className={classes.filters_footer_clear}
-          onClick={handleClearFilters}
-        >
+        <button className={classes.footer_clear} onClick={handleClearFilters}>
           CLEAR
         </button>
       </div>

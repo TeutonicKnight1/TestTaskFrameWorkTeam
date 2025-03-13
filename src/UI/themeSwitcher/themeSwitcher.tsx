@@ -1,6 +1,3 @@
-import dark_icon from '@assets/switchTheme_dark_icon.png';
-// import light_icon from '@assets/switchTheme_light_icon.png';
-
 import classes from './themeSwitcher.module.scss';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { setTheme } from '@store/slices/themeSlice';

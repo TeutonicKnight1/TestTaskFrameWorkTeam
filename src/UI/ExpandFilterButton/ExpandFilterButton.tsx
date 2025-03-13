@@ -1,27 +1,22 @@
 import React from 'react';
-import classes from './paginationButtons.module.scss';
+import classes from './expandFilterButton.module.scss';
 
 import { useAppSelector } from '@hooks/redux';
 
-interface ArrowPageButtonProps {
+interface ExpandFilterButtonProps {
   callback: () => void;
-  styleClass: string;
 }
-const ArrowPageButton: React.FC<ArrowPageButtonProps> = ({
+const ExpandFilterButton: React.FC<ExpandFilterButtonProps> = ({
   callback,
-  styleClass,
-}: ArrowPageButtonProps) => {
+}: ExpandFilterButtonProps) => {
   const currentTheme = useAppSelector(state => state.theme.theme);
 
   return (
-    <button
-      className={classes[styleClass] || classes.button}
-      onClick={callback}
-    >
+    <button className={classes.button} onClick={callback}>
       <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
+        width="9"
+        height="13"
+        viewBox="0 0 9 13"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -32,10 +27,11 @@ const ArrowPageButton: React.FC<ArrowPageButtonProps> = ({
               ? import.meta.env.VITE_LIGHT_SVG_THEME
               : import.meta.env.VITE_DARK_SVG_THEME
           }
+          transform="translate(-6, -4), scale(1.09)"
         />
       </svg>
     </button>
   );
 };
 
-export default ArrowPageButton;
+export default ExpandFilterButton;

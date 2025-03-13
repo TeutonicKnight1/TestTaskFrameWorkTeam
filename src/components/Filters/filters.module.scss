@@ -2,12 +2,14 @@
 
 .filters {
   width: 492px;
-  height: 1060px;
+  height: 100vh;
 
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
+  right: -492px;
   z-index: 2;
+
+  transition: right 0.5s ease-in-out;
 
   background-color: var(--primary-color);
 
@@ -22,7 +24,7 @@
     width: 20px;
     height: 20px;
 
-    &_button {
+    .cross_button {
       width: 20px;
       height: 20px;
 
@@ -33,113 +35,94 @@
     }
   }
 
-  &_content {
+  .content {
     height: 404px;
-  }
 
-  &_list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    .list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
 
-    width: 320px;
+      width: 320px;
 
-    margin-left: 40px;
-    margin-top: 100px;
+      margin-left: 40px;
+      margin-top: 100px;
 
-    &_artist,
-    &_location,
-    &_years {
-      width: 100%;
-      &_header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &_title {
-          font-weight: 500;
-          font-size: $h1-medium;
-        }
-
-        &_button {
-          border: none;
-          padding: 0;
-          background-color: transparent;
-          cursor: pointer;
-        }
-      }
-
-      &_content {
-        height: 0;
-        overflow: hidden;
-        transition: height 0.3s ease; // Плавное изменение высоты
-
-        &_select {
-          margin-top: 24px;
-
-          width: 100%;
-          height: 36px;
-
-          padding: 8px 16px;
-
-          background-color: var(--secondary-color);
-          border-radius: 4px;
-          border: none;
-
-          font-family: $inter;
-          font-size: $p-medium;
-          color: var(--primary-color-reverse);
-
-          outline: none;
-        }
-
-        &_form {
-          margin-top: 24px;
-
+      &_artist,
+      &_location,
+      &_years {
+        width: 100%;
+        .header {
           display: flex;
           align-items: center;
+          justify-content: space-between;
 
-          &_input {
-            width: 67px;
-            height: 36px;
-            box-sizing: border-box;
+          .title {
+            font-weight: 500;
+            font-size: $h1-medium;
+          }
 
-            padding: 8px 16px;
-
-            background-color: var(--secondary-color);
-            border-radius: 4px;
+          .expand_button {
             border: none;
-
-            font-family: $inter;
-            font-size: $p-medium;
-            color: var(--primary-color-reverse);
-          }
-
-          &_icon {
-            margin: 8px;
+            padding: 0;
+            background-color: transparent;
+            cursor: pointer;
           }
         }
 
-        &.open {
-          height: 60px;
+        .content {
+          height: 0;
+          overflow: hidden;
+          transition: height 0.3s ease; // Плавное изменение высоты
+
+          .form {
+            margin-top: 24px;
+
+            display: flex;
+            align-items: center;
+
+            .input {
+              width: 67px;
+              height: 36px;
+              box-sizing: border-box;
+
+              padding: 8px 16px;
+
+              background-color: var(--secondary-color);
+              border-radius: 4px;
+              border: none;
+
+              font-family: $inter;
+              font-size: $p-medium;
+              color: var(--primary-color-reverse);
+            }
+
+            .icon {
+              margin: 8px;
+            }
+          }
+
+          &.open {
+            height: 60px;
+          }
         }
       }
-    }
 
-    &_years {
-      &_content {
-        display: flex;
+      &_years {
+        .content {
+          display: flex;
+        }
       }
-    }
 
-    &_location,
-    &_years {
-      margin-top: 32px;
+      &_location,
+      &_years {
+        margin-top: 32px;
+      }
     }
   }
 
-  &_footer {
+  .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -173,16 +156,16 @@
       margin-top: 24px;
     }
 
-    &_content {
+    .content {
       height: 440px;
+
+      .list {
+        margin-top: 136px;
+        margin-left: 32px;
+      }
     }
 
-    &_list {
-      margin-top: 136px;
-      margin-left: 32px;
-    }
-
-    &_footer {
+    .footer {
       margin-left: 32px;
     }
   }
@@ -197,51 +180,47 @@
       margin-top: 20px;
     }
 
-    &_content {
+    .content {
       height: 364px;
-    }
 
-    &_list {
-      margin-top: 84px;
-      margin-left: 20px;
+      .list {
+        margin-top: 84px;
+        margin-left: 20px;
 
-      width: 240px;
+        width: 240px;
 
-      &_artist,
-      &_location,
-      &_years {
-        &_header {
-          &_title {
-            font-size: $h2-medium;
-          }
+        &_artist,
+        &_location,
+        &_years {
+          .header {
+            .title {
+              font-size: $h2-medium;
+            }
 
-          &_button {
-            width: 12px;
-            height: 12px;
-          }
-        }
-
-        &_content {
-          &_select {
-            height: 33px;
-          }
-
-          &_form {
-            &_input {
-              height: 33px;
-
-              font-size: $p-small;
+            .expand_button {
+              width: 12px;
+              height: 12px;
             }
           }
 
-          &.open {
-            height: 57px;
+          .content {
+            .form {
+              .input {
+                height: 33px;
+
+                font-size: $p-small;
+              }
+            }
+
+            &.open {
+              height: 57px;
+            }
           }
         }
       }
     }
 
-    &_footer {
+    .footer {
       margin-left: 20px;
       margin-top: 60px;
 
@@ -250,32 +229,10 @@
   }
 }
 
-.filters_active {
-  animation: slide-out 0.5s ease-in-out forwards;
-}
-
 .filters_open {
-  animation: slide-in 0.5s ease-in-out forwards;
+  right: 0;
 }
 
-@keyframes slide-in {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-out {
-  0% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+.filters_close {
+  right: -492px;
 }

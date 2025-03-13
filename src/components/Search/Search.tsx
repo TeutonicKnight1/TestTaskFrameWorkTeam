@@ -9,6 +9,7 @@ import { setFindString } from '@store/slices/filtersSlice';
 import Filters from '@components/Filters/Filters';
 import FiltersButton from '@UI/FiltersButton/FiltersButton';
 import SearchButton from '@UI/SearchButton/SearchButton';
+import ClearFilterInputButton from '@UI/ClearInputFilterButton/ClearInputFilterButton';
 
 const Search: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +18,9 @@ const Search: React.FC = () => {
   const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
-    dispatch(setFindString(''));
+    if (query.length === 0) {
+      dispatch(setFindString(''));
+    }
   }, [debouncedQuery]);
 
   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -45,6 +48,9 @@ const Search: React.FC = () => {
             value={query}
             onChange={handleQueryChange}
           />
+          {query.length !== 0 && (
+            <ClearFilterInputButton callback={() => setQuery('')} />
+          )}
         </form>
         <FiltersButton />
       </div>

@@ -3,8 +3,8 @@ import classes from './filtersSelect.module.scss';
 
 import plus_dark_icon from '@assets/expand_plus_dark_icon.png';
 import minus_dark_icon from '@assets/expand_minus_dark_icon.png';
-
-import { useDebounce } from '@hooks/useDebounce';
+import ExpandFilterButton from '@UI/ExpandFilterButton/ExpandFilterButton';
+import ClearFilterInputButton from '@UI/ClearInputFilterButton/ClearInputFilterButton';
 
 interface IFiltersSelectProps<T> {
   name: string;
@@ -23,6 +23,7 @@ const FiltersSelect = <T extends Record<string, any>>({
 }: IFiltersSelectProps<T>) => {
   const [filterIsOpened, setFilterIsOpened] = useState(false);
   const [optionIsOpened, setOptionIsOpened] = useState(false);
+
   const [optionsArray, setOptions] = useState<T[]>(options || []);
 
   const [inputValue, setInputValue] = useState('');
@@ -49,7 +50,6 @@ const FiltersSelect = <T extends Record<string, any>>({
   };
 
   const updateOption = () => {
-    console.log(inputValue);
     if (inputValue.length == 0) {
       setOptions(optionsArray);
       onSelectOption(0);
@@ -63,12 +63,12 @@ const FiltersSelect = <T extends Record<string, any>>({
   };
 
   useEffect(() => {
-    setOptions(options || []); // Если options обновляются, обновляем optionsArray
+    setOptions(options || []);
   }, [options]);
 
   useEffect(() => {
     if (inputValue.length === 0) {
-      setOptions(options || []); // Восстанавливаем исходный массив при очистке инпута
+      setOptions(options || []);
       onSelectOption(0);
     } else {
       setOptions(
@@ -77,7 +77,7 @@ const FiltersSelect = <T extends Record<string, any>>({
         )
       );
     }
-  }, [inputValue, options]); // Теперь updateOption работает автоматически
+  }, [inputValue, options]);
 
   return (
     <div className={classes.filters_select}>
@@ -95,18 +95,22 @@ const FiltersSelect = <T extends Record<string, any>>({
             type="text"
             value={inputValue}
             onChange={e => {
-              console.log(e.target.value.length);
               setInputValue(e.target.value);
               updateOption();
             }}
             onFocus={toggleOption}
-            //onBlur={toggleOption}
             className={classes.input}
           ></input>
-          <button
-            className={classes.select_expand_button}
-            onClick={toggleOption}
-          ></button>
+          {!optionIsOpened ? (
+            <ExpandFilterButton callback={toggleOption} />
+          ) : (
+            <ClearFilterInputButton
+              callback={() => {
+                setInputValue('');
+                setOptionIsOpened(prev => !prev);
+              }}
+            />
+          )}
         </div>
       </div>
       {optionIsOpened && (
@@ -119,7 +123,6 @@ const FiltersSelect = <T extends Record<string, any>>({
               }`}
               onMouseEnter={() => setHighlightedIndex(index)}
               onClick={() => {
-                console.log(options);
                 setInputValue(option[labelKey]);
                 handleOptionClick(option);
                 toggleOption();

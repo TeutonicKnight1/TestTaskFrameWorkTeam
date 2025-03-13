@@ -44,8 +44,6 @@
 
         font-size: 14px;
       }
-      .select_expand_button {
-      }
     }
 
     &.open {
@@ -63,11 +61,26 @@
       color: var(--primary-color-reverse);
       border: none;
       padding: 8px 16px;
-      
+
       z-index: 1;
 
       &.selected {
         background-color: var(--accent-color);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .filters_select {
+    .header {
+      .title {
+        font-size: $h2-medium;
+      }
+
+      .expand_button {
+        width: 12px;
+        height: 12px;
       }
     }
   }

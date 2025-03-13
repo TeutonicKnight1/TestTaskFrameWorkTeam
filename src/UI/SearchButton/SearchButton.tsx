@@ -1,6 +1,6 @@
 import classes from './searchButton.module.scss';
 
-import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { useAppSelector } from '@hooks/redux';
 
 interface SearchButtonProps {
   handleButtonClick: () => void;
